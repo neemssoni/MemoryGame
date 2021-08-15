@@ -70,6 +70,7 @@ export default class App extends React.Component {
       selected_pairs: [],
       score: 0,
       cards: this.cards,
+      attempts: 0,
     };
   }
 
@@ -86,6 +87,7 @@ export default class App extends React.Component {
       selected_pairs: [],
       cards: cards,
       score: 0,
+      attempts: 0,
     });
   };
 
@@ -113,6 +115,7 @@ export default class App extends React.Component {
     );
   };
   clickCard = id => {
+    let {attempts} = this.state;
     let selected_pairs = this.state.selected_pairs;
     let current_selection = this.state.current_selection;
     let score = this.state.score;
@@ -143,15 +146,17 @@ export default class App extends React.Component {
             this.setState({
               cards: cards,
             });
-          }, 500);
+          }, 1000);
         }
 
         current_selection = [];
+        attempts = attempts + 1;
       }
       this.setState({
         score: score,
         cards: cards,
         current_selection: current_selection,
+        attempts,
       });
     }
   };
@@ -161,7 +166,7 @@ export default class App extends React.Component {
       <ScrollView style={styles.container}>
         <Header />
         <View style={styles.body}>{this.renderRows.call(this)}</View>
-        <Score score={this.state.score} />
+        <Score score={this.state.score} attempts={this.state.attempts} />
         <TouchableOpacity onPress={this.resetCards} style={styles.buttonStyle}>
           <Text style={styles.buttonText}>Reset</Text>
         </TouchableOpacity>

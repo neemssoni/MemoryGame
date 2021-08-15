@@ -5,7 +5,10 @@ export default class Score extends React.Component {
   render() {
     return (
       <View style={styles.score_container}>
-        <Text style={styles.score}>{this.props.score}</Text>
+        <Text style={styles.score}>
+          No. Of Attempts : {this.props.attempts}
+        </Text>
+        <Text style={styles.score}>Matches : {this.props.score}</Text>
       </View>
     );
   }
@@ -17,7 +20,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   score: {
-    fontSize: 40,
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
